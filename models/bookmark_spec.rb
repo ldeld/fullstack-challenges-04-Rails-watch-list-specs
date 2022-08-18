@@ -5,6 +5,10 @@ RSpec.describe "Bookmark", type: :model do
     Movie.create!(title: "Titanic", overview: "101-year-old Rose DeWitt Bukater tells the story of her life aboard the Titanic, 84 years later.")
   end
 
+  let(:wonder_woman) do
+    Movie.create!(title: "Wonder Woman 1984", overview:  "Wonder Woman comes into conflict with the Soviet Union during the Cold War in the 1980s")
+  end
+
   let (:classic_list) do
     List.create!(name: "Classic Movies")
   end
@@ -61,6 +65,9 @@ RSpec.describe "Bookmark", type: :model do
     expect(bookmark).not_to be_valid
 
     bookmark = Bookmark.new(valid_attributes.merge(list: comedy_list))
+    expect(bookmark).to be_valid
+
+    bookmark = Bookmark.new(valid_attributes.merge(movie: wonder_woman))
     expect(bookmark).to be_valid
   end
 end
